@@ -1,0 +1,77 @@
+<div class="fluent-time-picker">
+  <div
+    class="fluent-time-picker__wrapper"
+    (click)="isOpen = !isOpen"
+    cdkOverlayOrigin
+    #trigger="cdkOverlayOrigin">
+    <div class="fluent-time-picker__hour">hour</div>
+    <div class="fluent-time-picker__minute">minute</div>
+    <div class="fluent-time-picker__clock-identifier">AM</div>
+  </div>
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isOpen">
+    <div class="fluent-time-picker__picker">
+      <div class="fluent-time-picker__list-items">
+        <!-- Hour start -->
+        <div
+          class="fluent-time-picker__content"
+          fluentui-hover
+          (isHovered)="slideHover.hour = $event;">
+          <swiper [config]="hourSwiperConfig" #swiperHourRef>
+            <ng-container *ngFor="let hour of hours; trackBy: trackByNumber">
+              <ng-template swiperSlide>
+                {{ hour | padLeftNumber }}
+              </ng-template>
+            </ng-container>
+          </swiper>
+          <div class="fluent-time-picker__slide-buttons" *ngIf="slideHover.hour">
+            <ng-container *ngTemplateOutlet="buttonsTemplate; context: { className: 'hour' }"></ng-container>
+          </div>
+        </div>
+        <!-- Minute start -->
+        <div
+          class="fluent-time-picker__content"
+          fluentui-hover
+          (isHovered)="slideHover.minute = $event">
+          <swiper
+            class="swiper__minute"
+            [config]="minuteSwiperConfig"
+            (slideChange)="onChangeIndex($event)">
+            <ng-container *ngFor="let minute of minutes; trackBy: trackByNumber">
+              <ng-template swiperSlide>
+                {{ minute | padLeftNumber }}
+              </ng-template>
+            </ng-container>
+          </swiper>
+          <div class="fluent-time-picker__slide-buttons" *ngIf="slideHover.minute">
+            <ng-container *ngTemplateOutlet="buttonsTemplate; context: { className: 'minute' }"></ng-container>
+          </div>
+        </div>
+        <!-- Clock identifier start -->
+        <div
+          class="fluent-time-picker__content"
+          fluentui-hover
+          (isHovered)="slideHover.clockIdentifiers = $event">
+          <swiper [config]="commonSwiperConfig">
+            <ng-container *ngFor="let clockIdentifier of clockIdentifiers">
+              <ng-template swiperSlide>
+                {{ clockIdentifier }}
+              </ng-template>
+            </ng-container>
+          </swiper>
+          <div class="fluent-time-picker__slide-buttons" *ngIf="slideHover.clockIdentifiers">
+            <ng-container *ngTemplateOutlet="buttonsTemplate; context: { className: 'hour' }"></ng-container>
+          </div>
+        </div>
+        <div class="fluent-time-picker__timer-selected"></div>
+      </div>
+      <div class="fluent-time-picker__buttons"></div>
+    </div>
+  </ng-template>
+  <ng-template #buttonsTemplate let-class="className">
+    <div #buttonTop class="fluent-time-picker__slide-button fluent-time-picker__slide-button--top">top</div>
+    <div #buttonTop class="fluent-time-picker__slide-button fluent-time-picker__slide-button--bottom">bottom</div>
+  </ng-template>
+</div>
