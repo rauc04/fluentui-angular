@@ -1,11 +1,5 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "inlineStyleLanguage": "scss",
-  "allowedNonPeerDependencies": [
-    "swiper",
-    "@angular/cdk",
-    "@angular/animations"
-  ],
   "dest": "../../dist/fluentui-angular-components",
   "lib": {
     "entryFile": "src/public-api.ts"
