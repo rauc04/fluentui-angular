@@ -1,0 +1,21 @@
+<div class="fluentui-scroll">
+  <div class="fluentui-scroll__wrapper" #scrollWrapper>
+    <button
+      class="fluentui-scroll__button"
+      (click)="onScrollHorizontal(1)"
+      #previousButton>
+      <
+    </button>
+    <button
+      class="fluentui-scroll__button"
+      (click)="onScrollHorizontal(-1)"
+      #nextButton>
+      >
+    </button>
+    <div class="fluentui-scroll__items" #scrollItems>
+      <div class="fluentui-scroll__item" *ngFor="let item of items">
+        <ng-container [ngTemplateOutlet]="item.templateRef"></ng-container>
+      </div>
+    </div>
+  </div>
+</div>

@@ -129,43 +129,43 @@
         }
       }
     },
-    "fluentui-angular-components": {
+    "@fluentui-angular-components": {
       "projectType": "library",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/fluentui-angular-components",
-      "sourceRoot": "projects/fluentui-angular-components/src",
+      "root": "projects/@fluentui-angular-components",
+      "sourceRoot": "projects/@fluentui-angular-components/src",
       "prefix": "fluentui",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/fluentui-angular-components/tsconfig.lib.json",
-            "project": "projects/fluentui-angular-components/ng-package.json"
+            "tsConfig": "projects/@fluentui-angular-components/tsconfig.lib.json",
+            "project": "projects/@fluentui-angular-components/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/fluentui-angular-components/tsconfig.lib.prod.json"
+              "tsConfig": "projects/@fluentui-angular-components/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/fluentui-angular-components/src/test.ts",
-            "tsConfig": "projects/fluentui-angular-components/tsconfig.spec.json",
-            "karmaConfig": "projects/fluentui-angular-components/karma.conf.js"
+            "main": "projects/@fluentui-angular-components/src/test.ts",
+            "tsConfig": "projects/@fluentui-angular-components/tsconfig.spec.json",
+            "karmaConfig": "projects/@fluentui-angular-components/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/fluentui-angular-components/tsconfig.lib.json",
-              "projects/fluentui-angular-components/tsconfig.spec.json"
+              "projects/@fluentui-angular-components/tsconfig.lib.json",
+              "projects/@fluentui-angular-components/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

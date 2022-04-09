@@ -6,7 +6,7 @@
     "start": "ng serve --o --port=42002",
     "build": "ng build",
     "test": "ng test",
-    "build-fluent": "ng build fluentui-angular-components",
+    "build-fluent": "ng build @fluentui-angular-components",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
