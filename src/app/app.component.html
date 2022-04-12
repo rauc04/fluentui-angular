@@ -17,7 +17,8 @@
     #secondaryScroll
     [slidesPerView]="5"
     [spaceBetween]="8"
-    [slidePerGroup]="true">
+    [slidePerGroup]="true"
+    [showControls]="false">
     <ng-container *ngFor="let classification of classifications;">
       <ng-container *fluentuiScrollItem>
         <div class="color-box" [style]="'background-color:' + classification.color">

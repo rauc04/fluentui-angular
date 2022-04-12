@@ -65,27 +65,31 @@ export class FluentHorizontalScrollComponent implements OnInit, AfterViewInit {
       this.toPrevious.emit();
     }
 
-    if (currentScrollPosition <= 0) {
-      this.previousFlipperRef.hide();
-      this.nextFlipperRef.toShow();
-    } else {
-      this.previousFlipperRef.toShow();
-      this.nextFlipperRef.toShow();
-    }
+    if (this.showControls) {
+      if (currentScrollPosition <= 0) {
+        this.previousFlipperRef.hide();
+        this.nextFlipperRef.toShow();
+      } else {
+        this.previousFlipperRef.toShow();
+        this.nextFlipperRef.toShow();
+      }
 
-    if (Math.ceil(currentScrollPosition) >= this.maxScroll) {
-      currentScrollPosition = this.maxScroll;
+      if (Math.ceil(currentScrollPosition) >= this.maxScroll) {
+        currentScrollPosition = this.maxScroll;
 
-      this.nextFlipperRef.hide();
-    } else {
-      this.nextFlipperRef.toShow();
+        this.nextFlipperRef.hide();
+      } else {
+        this.nextFlipperRef.toShow();
+      }
     }
 
     nativeElement.scrollTo({ left: currentScrollPosition });
   }
 
   private initHorizontalScroll(): void {
-    this.previousFlipperRef.hide();
+    if (this.showControls) {
+      this.previousFlipperRef.hide();
+    }
 
     const widthByItem = Math.ceil(this.scrollWrapperRef.nativeElement.offsetWidth / (this.slidesPerView ?? 1));
 

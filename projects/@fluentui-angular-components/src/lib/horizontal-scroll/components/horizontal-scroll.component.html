@@ -2,12 +2,14 @@
   <fluentui-flipper
     class="fluentui-scroll__button"
     (click)="onScrollHorizontal(false)"
+    *ngIf="showControls"
     #previousFlipperRef>
   </fluentui-flipper>
   <fluentui-flipper
     class="fluentui-scroll__button fluentui-scroll__button--right"
     direction="next"
     (click)="onScrollHorizontal()"
+    *ngIf="showControls"
     #nextFlipperRef>
   </fluentui-flipper>
   <div class="fluentui-scroll__wrapper" #scrollWrapper>
