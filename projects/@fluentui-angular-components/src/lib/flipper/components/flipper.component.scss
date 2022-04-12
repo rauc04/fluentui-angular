@@ -1,0 +1,28 @@
+$neutral-stroke-control-rest: linear-gradient(#efefef 90%, #d6d6d6 100%);
+$neutral-fill-rest: #ffffff;
+
+.flipper {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  border-radius: 4px;
+  background: padding-box linear-gradient($neutral-fill-rest, $neutral-fill-rest), border-box $neutral-stroke-control-rest;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: 1s;
+
+  &__svg {
+    color: #4b4b4b;
+    fill: currentColor;
+
+    &--next {
+      transform: rotate(180deg);
+    }
+  }
+
+  &:hover {
+    .flipper__svg {
+      color: #717171;
+    }
+  }
+}
