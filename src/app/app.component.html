@@ -1,13 +1,29 @@
-<fluentui-horizontal-scroll
-  [spaceBetween]="8"
-  [slidesPerView]="5"
-  [slidePerGroup]="true"
-  [height]="374">
-  <ng-container *ngFor="let item of items;">
-    <ng-container *fluentuiScrollItem>
-      <img
-        class="fluentui-scroll__image"
-        src="https://images.unsplash.com/photo-1551410224-699683e15636?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80" alt="">
+<div style="padding: 0 0.5rem;">
+  <fluentui-horizontal-scroll
+    [slidesPerView]="5"
+    [spaceBetween]="8"
+    [slidePerGroup]="true"
+    (toNext)="toNext()"
+    (toPrevious)="toPrevious()">
+    <ng-container *ngFor="let classification of classifications;">
+      <ng-container *fluentuiScrollItem>
+        <div class="color-box" [style]="'background-color:' + classification.color">
+          {{ classification.label }}
+        </div>
+      </ng-container>
     </ng-container>
-  </ng-container>
-</fluentui-horizontal-scroll>
+  </fluentui-horizontal-scroll>
+  <fluentui-horizontal-scroll
+    #secondaryScroll
+    [slidesPerView]="5"
+    [spaceBetween]="8"
+    [slidePerGroup]="true">
+    <ng-container *ngFor="let classification of classifications;">
+      <ng-container *fluentuiScrollItem>
+        <div class="color-box" [style]="'background-color:' + classification.color">
+          {{ classification.label }}
+        </div>
+      </ng-container>
+    </ng-container>
+  </fluentui-horizontal-scroll>
+</div>

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlipperComponent } from './components/flipper.component';
+import { FluentFlipperComponent } from './components/flipper.component';
 
 @NgModule({
   declarations: [
-    FlipperComponent
+    FluentFlipperComponent
   ],
   exports: [
-    FlipperComponent
+    FluentFlipperComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class FlipperModule { }
+export class FluentFlipperModule { }

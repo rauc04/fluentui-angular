@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HorizontalScrollComponent } from './components/horizontal-scroll.component';
+import { FluentHorizontalScrollComponent } from './components/horizontal-scroll.component';
 import { ScrollItemDirective } from './directive/scroll-item/scroll-item.directive';
 import { ScrollItemElementRefDirective } from './directive/scroll-item-element-ref/scroll-item-element-ref.directive';
+import { FluentFlipperModule } from '../flipper/flipper.module';
 
 @NgModule({
   declarations: [
-    HorizontalScrollComponent,
+    FluentHorizontalScrollComponent,
     ScrollItemDirective,
     ScrollItemElementRefDirective
   ],
   exports: [
-    HorizontalScrollComponent,
+    FluentHorizontalScrollComponent,
     ScrollItemDirective
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FluentFlipperModule
   ]
 })
-export class HorizontalScrollModule { }
+export class FluentHorizontalScrollModule { }

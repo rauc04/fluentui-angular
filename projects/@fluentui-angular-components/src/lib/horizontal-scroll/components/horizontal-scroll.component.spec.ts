@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HorizontalScrollComponent } from './horizontal-scroll.component';
+import { FluentHorizontalScrollComponent } from './horizontal-scroll.component';
 
 describe('HorizontalScrollComponent', () => {
-  let component: HorizontalScrollComponent;
-  let fixture: ComponentFixture<HorizontalScrollComponent>;
+  let component: FluentHorizontalScrollComponent;
+  let fixture: ComponentFixture<FluentHorizontalScrollComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HorizontalScrollComponent ]
+      declarations: [ FluentHorizontalScrollComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HorizontalScrollComponent);
+    fixture = TestBed.createComponent(FluentHorizontalScrollComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

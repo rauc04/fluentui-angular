@@ -1,17 +1,16 @@
 <div class="fluentui-scroll">
+  <fluentui-flipper
+    class="fluentui-scroll__button"
+    (click)="onScrollHorizontal(false)"
+    #previousFlipperRef>
+  </fluentui-flipper>
+  <fluentui-flipper
+    class="fluentui-scroll__button fluentui-scroll__button--right"
+    direction="next"
+    (click)="onScrollHorizontal()"
+    #nextFlipperRef>
+  </fluentui-flipper>
   <div class="fluentui-scroll__wrapper" #scrollWrapper>
-    <button
-      class="fluentui-scroll__button"
-      (click)="onScrollHorizontal(1)"
-      #previousButton>
-      <
-    </button>
-    <button
-      class="fluentui-scroll__button"
-      (click)="onScrollHorizontal(-1)"
-      #nextButton>
-      >
-    </button>
     <div class="fluentui-scroll__items" #scrollItems>
       <div class="fluentui-scroll__item" *ngFor="let item of items">
         <ng-container [ngTemplateOutlet]="item.templateRef"></ng-container>

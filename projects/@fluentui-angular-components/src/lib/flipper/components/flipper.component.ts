@@ -5,7 +5,7 @@ import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@ang
   templateUrl: './flipper.component.html',
   styleUrls: ['./flipper.component.scss']
 })
-export class FlipperComponent implements OnInit {
+export class FluentFlipperComponent implements OnInit {
   @ViewChild('flipperRef') flipperRef!: ElementRef<HTMLDivElement>;
 
   @Input() direction!: 'previous' | 'next';
@@ -19,12 +19,10 @@ export class FlipperComponent implements OnInit {
   }
 
   hide(): void {
-    // this.renderer2.setStyle(this.flipperRef.nativeElement, 'opacity', Opacity.Invisible);
     this.renderer2.setStyle(this.flipperRef.nativeElement, 'display', 'none');
   }
 
   toShow(): void {
-    // this.renderer2.setStyle(this.flipperRef.nativeElement, 'opacity', Opacity.Visible);
     this.renderer2.removeStyle(this.flipperRef.nativeElement, 'display');
   }
 }

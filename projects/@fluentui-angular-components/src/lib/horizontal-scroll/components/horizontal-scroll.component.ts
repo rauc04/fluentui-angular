@@ -1,30 +1,45 @@
-import { AfterViewInit, Component, ContentChildren, ElementRef, Input, OnInit, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  Renderer2,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
+import { FluentFlipperComponent } from '../../flipper/components/flipper.component';
 import { ScrollItemElementRefDirective } from '../directive/scroll-item-element-ref/scroll-item-element-ref.directive';
 import { ScrollItemDirective } from '../directive/scroll-item/scroll-item.directive';
-import { Opacity } from '../utils/enum';
 
 @Component({
   selector: 'fluentui-horizontal-scroll',
   templateUrl: './horizontal-scroll.component.html',
-  styleUrls: ['./horizontal-scroll.component.scss']
+  styleUrls: ['./horizontal-scroll.component.scss'],
+  exportAs: 'horizontal-scroll'
 })
-export class HorizontalScrollComponent implements OnInit, AfterViewInit {
+export class FluentHorizontalScrollComponent implements OnInit, AfterViewInit {
   @ContentChildren(ScrollItemDirective) items!: QueryList<ScrollItemDirective>;
   @ViewChildren(ScrollItemElementRefDirective, { read: ElementRef }) private itemsElementsRef!: QueryList<ElementRef<HTMLDivElement>>;
 
   @ViewChild('scrollWrapper') private scrollWrapperRef!: ElementRef<HTMLDivElement>;
   @ViewChild('scrollItems') private scrollItemsRef!: ElementRef<HTMLDivElement>;
-  @ViewChild('previousButton') private previousButtonRef!: ElementRef<HTMLButtonElement>;
-  @ViewChild('nextButton') private nextButtonRef!: ElementRef<HTMLButtonElement>;
+  @ViewChild('previousFlipperRef') private previousFlipperRef!: FluentFlipperComponent;
+  @ViewChild('nextFlipperRef') private nextFlipperRef!: FluentFlipperComponent;
 
   @Input() slidesPerView: number | undefined = undefined;
   @Input() slidePerGroup = false;
   @Input() spaceBetween = 0;
   @Input() height: number | undefined = undefined;
-  @Input() timing = '250ms ease-in';
   @Input() showControls = true;
 
-  private currentScrollPosition = 0;
+  @Output() toNext = new EventEmitter<void>();
+  @Output() toPrevious = new EventEmitter<void>();
+
   private scrollAmount = 0;
   private maxScroll = 0;
 
@@ -38,28 +53,39 @@ export class HorizontalScrollComponent implements OnInit, AfterViewInit {
     this.initHorizontalScroll();
   }
 
-  onScrollHorizontal(value: number): void {
-    this.currentScrollPosition += (value * this.scrollAmount);
+  onScrollHorizontal(isNext: boolean = true): void {
+    const { nativeElement } = this.scrollWrapperRef;
+    let currentScrollPosition = 0;
 
-    if (this.currentScrollPosition >= 0) {
-      this.currentScrollPosition = 0;
-      this.setOpacityButton(this.previousButtonRef, Opacity.Invisible);
+    if (isNext) {
+      currentScrollPosition = nativeElement.scrollLeft + this.scrollAmount;
+      this.toNext.emit();
     } else {
-      this.setOpacityButton(this.previousButtonRef, Opacity.Visible);
+      currentScrollPosition = nativeElement.scrollLeft - this.scrollAmount;
+      this.toPrevious.emit();
     }
 
-    if (this.currentScrollPosition <= this.maxScroll) {
-      this.currentScrollPosition = this.maxScroll;
-      this.setOpacityButton(this.nextButtonRef, Opacity.Invisible);
+    if (currentScrollPosition <= 0) {
+      this.previousFlipperRef.hide();
+      this.nextFlipperRef.toShow();
     } else {
-      this.setOpacityButton(this.nextButtonRef, Opacity.Visible);
+      this.previousFlipperRef.toShow();
+      this.nextFlipperRef.toShow();
     }
 
-    this.renderer2.setStyle(this.scrollItemsRef.nativeElement, 'left', `${this.currentScrollPosition}px`);
+    if (Math.ceil(currentScrollPosition) >= this.maxScroll) {
+      currentScrollPosition = this.maxScroll;
+
+      this.nextFlipperRef.hide();
+    } else {
+      this.nextFlipperRef.toShow();
+    }
+
+    nativeElement.scrollTo({ left: currentScrollPosition });
   }
 
   private initHorizontalScroll(): void {
-    this.setOpacityButton(this.previousButtonRef, Opacity.Invisible);
+    this.previousFlipperRef.hide();
 
     const widthByItem = Math.ceil(this.scrollWrapperRef.nativeElement.offsetWidth / (this.slidesPerView ?? 1));
 
@@ -86,12 +112,7 @@ export class HorizontalScrollComponent implements OnInit, AfterViewInit {
       this.scrollAmount = this.slidePerGroup ? (widthByItem * this.slidesPerView) : widthByItem;
     }
 
-    this.maxScroll = this.scrollWrapperRef.nativeElement.offsetWidth - this.scrollItemsRef.nativeElement.offsetWidth;
-  }
-
-  private setOpacityButton(buttonRef: ElementRef<HTMLButtonElement>, opacity: Opacity): void {
-    const { nativeElement } = buttonRef;
-    this.renderer2.setStyle(nativeElement, 'opacity', opacity);
+    this.maxScroll = this.scrollWrapperRef.nativeElement.scrollWidth - this.scrollItemsRef.nativeElement.offsetWidth;
   }
 
   private parseUnit(value: number, unit: 'px' | 'rem' | 'em'): string {

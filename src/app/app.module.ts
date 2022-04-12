@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HorizontalScrollModule } from '@fluentui-angular-components';
+import { FluentHorizontalScrollModule } from '@fluentui-angular-components';
 
 import { AppComponent } from './app.component';
 
@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HorizontalScrollModule
+    FluentHorizontalScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

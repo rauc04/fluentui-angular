@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FlipperComponent } from './flipper.component';
+import { FluentFlipperComponent } from './flipper.component';
 
 describe('FlipperComponent', () => {
-  let component: FlipperComponent;
-  let fixture: ComponentFixture<FlipperComponent>;
+  let component: FluentFlipperComponent;
+  let fixture: ComponentFixture<FluentFlipperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FlipperComponent ]
+      declarations: [ FluentFlipperComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FlipperComponent);
+    fixture = TestBed.createComponent(FluentFlipperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
