@@ -91,6 +91,13 @@ export class DialogComponent implements OnInit {
           color: '#f29107',
         },
       ];
-    }, 800);
+    }, 1000);
+
+    setTimeout(() => {
+      this.classifications?.push({
+        label: 'TRANSICIÓN DEFENSIVA',
+        color: '#f29107',
+      });
+    }, 3000);
   }
 }

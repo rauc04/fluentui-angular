@@ -26,8 +26,8 @@ export class FluentHorizontalScrollComponent implements OnInit, AfterViewInit {
   @ContentChildren(ScrollItemDirective) items!: QueryList<ScrollItemDirective>;
   @ViewChildren(ScrollItemElementRefDirective, { read: ElementRef }) private itemsElementsRef!: QueryList<ElementRef<HTMLDivElement>>;
 
-  @ViewChild('scrollWrapper') private scrollWrapperRef!: ElementRef<HTMLDivElement>;
-  @ViewChild('scrollItems') private scrollItemsRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('scrollWrapper', { static: false }) private scrollWrapperRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('scrollItems', { static: false }) private scrollItemsRef!: ElementRef<HTMLDivElement>;
   @ViewChild('previousFlipperRef') private previousFlipperRef!: FluentFlipperComponent;
   @ViewChild('nextFlipperRef') private nextFlipperRef!: FluentFlipperComponent;
 
@@ -51,6 +51,10 @@ export class FluentHorizontalScrollComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initHorizontalScroll();
+
+    this.itemsElementsRef.changes.subscribe(itemsChanges => {
+      this.initHorizontalScroll();
+    });
   }
 
   onScrollHorizontal(isNext: boolean = true): void {
@@ -81,9 +85,6 @@ export class FluentHorizontalScrollComponent implements OnInit, AfterViewInit {
           this.nextFlipperRef.toShow();
         }
       }
-
-      console.log('this.maxScroll', this.maxScroll);
-      console.log('Math.ceil(currentScrollPosition)', Math.ceil(currentScrollPosition));
     }
 
     nativeElement.scrollTo({ left: currentScrollPosition });
@@ -93,6 +94,9 @@ export class FluentHorizontalScrollComponent implements OnInit, AfterViewInit {
     const widthByItem = Math.ceil(this.scrollWrapperRef.nativeElement.offsetWidth / (this.slidesPerView ?? 1));
 
     this.itemsElementsRef.forEach((item, itemIndex) => {
+      this.renderer2.removeStyle(item.nativeElement, 'width');
+      this.renderer2.removeStyle(item.nativeElement, 'margin-right');
+
       const widthWithMargin = widthByItem - this.spaceBetween;
 
       this.renderer2.setStyle(item.nativeElement, 'width', this.parseUnit(widthWithMargin, 'px'));
@@ -122,6 +126,8 @@ export class FluentHorizontalScrollComponent implements OnInit, AfterViewInit {
 
       if (this.maxScroll === 0) {
         this.nextFlipperRef.hide();
+      } else {
+        this.nextFlipperRef.toShow();
       }
     }
   }
