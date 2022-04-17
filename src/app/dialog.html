@@ -1,0 +1,38 @@
+<div>
+  <div style="height: 100%; padding: 0 1.5em">
+    <mat-tab-group mat-align-tabs="center" animationDuration="1500ms">
+      <mat-tab [disabled]="false" label="Tab 1">
+        <div></div>
+      </mat-tab>
+      <mat-tab [disabled]="false" label="Tab 2">
+        <ng-template matTabContent>
+          <div style="height: 100%; padding: 1em">
+            <div>
+              <div
+                  style="padding-bottom: 8px; padding-top: 8px"
+                >
+                  <fluentui-horizontal-scroll
+                    [slidesPerView]="5"
+                    [spaceBetween]="8"
+                    [slidePerGroup]="true"
+                  >
+                    <ng-container *ngFor="let classification of classifications;">
+                      <ng-container *fluentuiScrollItem>
+                        <div class="color-box" [style]="'background-color:' + classification.color">
+                          {{ classification.label }}
+                        </div>
+                      </ng-container>
+                    </ng-container>
+                  </fluentui-horizontal-scroll>
+                </div>
+            </div>
+          </div>
+        </ng-template>
+        
+      </mat-tab>
+      <mat-tab [disabled]="false" label="Tab 3">
+        <div></div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

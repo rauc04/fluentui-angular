@@ -8,4 +8,4 @@ import { NgModule } from '@angular/core';
   exports: [
   ]
 })
-export class FluentuiAngularComponentsModule { }
+export class FluentAngularComponentsModule { }

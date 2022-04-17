@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { FluentHorizontalScrollComponent } from '@fluentui-angular-components';
 
 @Component({
@@ -10,84 +11,42 @@ export class AppComponent implements OnInit {
   title = 'fluentui-angular';
   @ViewChild('secondaryScroll') secondaryScroll!: FluentHorizontalScrollComponent;
 
-  classifications = [
-    {
-      label: 'TÉCNICA',
-      color: '#e60a0a',
-    },
-    {
-      label: 'ATAQUE ORGANIZADO',
-      color: '#0fd730',
-    },
-    {
-      label: 'TRANSICIÓN OFENSIVA',
-      color: '#b9b41d',
-    },
-    {
-      label: 'DEFENSA ORGANIZADA',
-      color: '#290feb',
-    },
-    {
-      label: 'TRANSICIÓN DEFENSIVA',
-      color: '#f29107',
-    },
-    {
-      label: 'VELOCIDAD',
-      color: '#000',
-    },
+  classifications: any[] | undefined;
 
-    {
-      label: 'TÉCNICA',
-      color: '#e60a0a',
-    },
-    {
-      label: 'ATAQUE ORGANIZADO',
-      color: '#0fd730',
-    },
-    {
-      label: 'TRANSICIÓN OFENSIVA',
-      color: '#b9b41d',
-    },
-    {
-      label: 'DEFENSA ORGANIZADA',
-      color: '#290feb',
-    },
-    {
-      label: 'TRANSICIÓN DEFENSIVA',
-      color: '#f29107',
-    },
-    {
-      label: 'VELOCIDAD',
-      color: '#000',
-    },
+  constructor(public dialog: MatDialog) {}
 
-    {
-      label: 'TÉCNICA',
-      color: '#e60a0a',
-    },
-    {
-      label: 'ATAQUE ORGANIZADO',
-      color: '#0fd730',
-    },
-    {
-      label: 'TRANSICIÓN OFENSIVA',
-      color: '#b9b41d',
-    },
-    {
-      label: 'DEFENSA ORGANIZADA',
-      color: '#290feb',
-    },
-    {
-      label: 'TRANSICIÓN DEFENSIVA',
-      color: '#f29107',
-    },
-    {
-      label: 'VELOCIDAD',
-      color: '#000',
-    },
-  ];
+  ngOnInit(): void {
+    this.classifications = [
+      {
+        label: 'TÉCNICA',
+        color: '#e60a0a',
+      },
+      {
+        label: 'ATAQUE ORGANIZADO',
+        color: '#0fd730',
+      },
+      {
+        label: 'TRANSICIÓN OFENSIVA',
+        color: '#b9b41d',
+      },
+      {
+        label: 'DEFENSA ORGANIZADA',
+        color: '#290feb',
+      },
+      {
+        label: 'TRANSICIÓN DEFENSIVA',
+        color: '#f29107',
+      },
+      {
+        label: 'VELOCIDAD',
+        color: '#000',
+      }
+    ];
+  }
 
-  ngOnInit(): void { }
+  openDialog(): void {
+    this.dialog.open(DialogComponent, { width: '95vw', maxWidth: '100%' });
+  }
 
   toNext(): void {
     console.log('to next');
@@ -97,5 +56,41 @@ export class AppComponent implements OnInit {
   toPrevious(): void {
     console.log('to previous');
     this.secondaryScroll.onScrollHorizontal(false);
+  }
+}
+
+@Component({
+  selector: 'app-dialog',
+  templateUrl: 'dialog.html',
+  styleUrls: ['./app.component.scss'],
+})
+export class DialogComponent implements OnInit {
+  classifications: any[] | undefined;
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.classifications = [
+        {
+          label: 'TÉCNICA',
+          color: '#e60a0a',
+        },
+        {
+          label: 'ATAQUE ORGANIZADO',
+          color: '#0fd730',
+        },
+        {
+          label: 'TRANSICIÓN OFENSIVA',
+          color: '#b9b41d',
+        },
+        {
+          label: 'DEFENSA ORGANIZADA',
+          color: '#290feb',
+        },
+        {
+          label: 'TRANSICIÓN DEFENSIVA',
+          color: '#f29107',
+        },
+      ];
+    }, 800);
   }
 }
