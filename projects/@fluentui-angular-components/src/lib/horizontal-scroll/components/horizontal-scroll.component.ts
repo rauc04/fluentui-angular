@@ -34,6 +34,14 @@ export class FluentHorizontalScrollComponent implements OnInit, AfterViewInit {
   @Input() slidesPerView: number | undefined = undefined;
   @Input() slidePerGroup = false;
   @Input() spaceBetween = 0;
+  /**
+   * default value: `true`
+   */
+  @Input() outlineWrapper = true;
+  /**
+   * default value: `center`
+   */
+  @Input() alignItem: 'flex-start' | 'center' | 'flex-end' = 'center';
   @Input() height: number | undefined = undefined;
   @Input() showControls = true;
 

@@ -12,9 +12,15 @@
     *ngIf="showControls"
     #nextFlipperRef>
   </fluentui-flipper>
-  <div class="fluentui-scroll__wrapper" #scrollWrapper>
+  <div
+    class="fluentui-scroll__wrapper"
+    [ngClass]="{ 'fluentui-scroll__outline': outlineWrapper }"
+    #scrollWrapper>
     <div class="fluentui-scroll__items" #scrollItems>
-      <div class="fluentui-scroll__item" *ngFor="let item of items">
+      <div
+        class="fluentui-scroll__item"
+        [ngStyle]="{ 'align-items': alignItem }"
+        *ngFor="let item of items">
         <ng-container [ngTemplateOutlet]="item.templateRef"></ng-container>
       </div>
     </div>
