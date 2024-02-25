@@ -1,3 +1,3 @@
 # FluentuiAngularComponents
 
-Angular 1️⃣5️⃣
+Angular 17
